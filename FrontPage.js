@@ -28,14 +28,23 @@ console.log(dietOptions)
         "It should be " + cuisine.value + " cuisine." +
         "It should not take more than " + time.value + " minutes to make."
 
+ let test = "where is Beijing"
 
     console.log("question = " + question)
 
-    const url = "http://localhost:8080/chat?message= " + question
+    const url = "http://localhost:8080/chat?message= " + test
     const show = document.getElementById("result")
     console.log(url)
-    let answer = fetchAnswer(url).then(()=>{
+    const answer = fetchAnswer(url).then(()=>{
+        if(answer.state == "fulfilled"){
+        console.log(answer)
+        /*console.log(answer.content)
+        console.log(JSON.parse(answer))
+        console.log(JSON.parse(answer).value)*/
         show.innerText = answer
+        }else{
+            show.innerText = " NOPE!!!!!"
+        }
     })
 
 
