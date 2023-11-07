@@ -1,5 +1,9 @@
 <head>
     <title>Welcome page</title>
+    <link rel="Stylesheet" href="Stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
 
 </head>
 <body>
@@ -14,17 +18,22 @@
         <option value="asian">Asian</option>
         <option value="american">American</option>
         <option value="other">Other</option>
-    </select><br>
+    </select>
+    <input type="text" id="customCuisine" name="customCuisine" placeholder="Enter a country" style="display: none;"><br>
 
-    <label for="spiciness" >2. How spicy do you like your food?</label>
-    <input type="radio" id="spicyMild" name="spiciness" value="mild">
-    <label for="spicyMild">Mild</label>
-    <input type="radio" id="spicyMedium" name="spiciness" value="medium">
-    <label for="spicyMedium">Medium</label>
-    <input type="radio" id="spicySpicy" name="spiciness" value="spicy">
-    <label for="spicySpicy">Spicy</label><br>
+</form>
 
-    <label for="diet">3. Do you have any dietary preferences or restrictions?</label>
+
+
+<label for="spiciness">2. How spicy do you like your food?</label>
+<input type="radio" id="spicyMild" name="spiciness" value="mild">
+<label for="spicyMild"><i class="fas fa-pepper-hot"></i></label>
+<input type="radio" id="spicyMedium" name="spiciness" value="medium">
+<label for="spicyMedium"><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i></label>
+<input type="radio" id="spicySpicy" name="spiciness" value="spicy">
+<label for="spicySpicy"><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i></label><br>
+
+<label for="diet">3. Do you have any dietary preferences or restrictions?</label>
     <input type="checkbox" id="vegetarian" name="diet" value="vegetarian">
     <label for="vegetarian">Vegetarian</label>
     <input type="checkbox" id="vegan" name="diet" value="vegan">

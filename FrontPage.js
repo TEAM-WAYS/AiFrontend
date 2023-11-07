@@ -14,3 +14,27 @@
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `<p>Your perfect dish is: [Replace with the selected dish]</p>`;
 }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var cuisineDropdown = document.getElementById("cuisine");
+        var customCuisineInput = document.getElementById("customCuisine");
+
+        cuisineDropdown.addEventListener("change", function() {
+            if (cuisineDropdown.value === "other") {
+                customCuisineInput.style.display = "block";
+                customCuisineInput.required = true;
+            } else {
+                customCuisineInput.style.display = "none";
+                customCuisineInput.required = false;
+            }
+        });
+
+        var dishSelectorForm = document.getElementById("dishSelectorForm");
+        dishSelectorForm.addEventListener("submit", function(event) {
+            if (cuisineDropdown.value === "other" && customCuisineInput.value.trim() === "") {
+                event.preventDefault();
+                alert("Please enter your custom cuisine choice.");
+            }
+        });
+    });
