@@ -1,15 +1,14 @@
 
-
+function selectDish() {
     const cuisine = document.getElementById("cuisine");
+
     const spiciness = document.querySelector('input[name="spiciness"]:checked');
+
     const dietOptions = document.querySelectorAll('input[name="diet"]:checked');
     const diet = Array.from(dietOptions).map(option => option.value);
     const time = document.getSelection().valueOf("time")
     const numberOfPeople = document.querySelector('input[name="people"]:checked')
     const button = document.getElementById("button")
-
-
-
 
 
     // Perform some logic to choose the dish based on user preferences
@@ -19,35 +18,32 @@
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `<p>Your perfect dish is: [Replace with the selected dish]</p>`;
 
-
-
-
+console.log(dietOptions)
     let caloraies = 750 * numberOfPeople
 
 
+    let question = "Make me a resepy for " + numberOfPeople + ", containing " + caloraies + " calories. " +
+        "It should be " + spiciness + " spicey. " +
+        //healthyness + " healthy. " +
+        "It should be " + cuisine.value + " cuisine." +
+        "It should not take more than " + time.value + " minutes to make."
 
 
-    let question = "Make me a resepy for "+numberOfPeople+", containing "+ caloraies +" calories. " +
-        "It should be "+spiciness.value+" spicey. " +
-        healthyness + " healthy. " +
-        "It should be "+cuisine.value+" cuisine."+
-        "It should not take more than "+time.value+" minutes to make."
+    console.log("question = " + question)
+
+    const url = "http://localhost:8080/chat?message= " + question
+    const show = document.getElementById("result")
+    console.log(url)
+    let answer = fetchAnswer(url).then(()=>{
+        show.innerText = answer
+    })
 
 
-    console.log("question = "+question)
+    // button.addEventListener('click', goTo())
+    /*sessionStorage.setItem("answer",answer )
+        window.location.href = "FrontPage.html"*/
+}
 
-    const url = "http://localhost:8080/chat?message="+question
-
-
-    button.addEventListener('click',goTo() )
-
-
-    function goTo(){
-        let answer = fetchAnswer(url)
-        sessionStorage.setItem("answer",answer )
-        window.location.href = "FrontPage.html"
-
-    }
 
 
 
