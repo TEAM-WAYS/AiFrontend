@@ -12,11 +12,13 @@
         <option value="italian">Italian</option>
         <option value="french">French</option>
         <option value="asian">Asian</option>
-        <option value="american">American</option>
+        <option value="danish">Danish</option>
         <option value="other">Other</option>
     </select><br>
 
     <label for="spiciness" >2. How spicy do you like your food?</label>
+    <input type="radio" id="nonSpicy" name="spiciness" value="nonSpicy">
+    <label for="nonSpicy">non-spicy</label>
     <input type="radio" id="spicyMild" name="spiciness" value="mild">
     <label for="spicyMild">Mild</label>
     <input type="radio" id="spicyMedium" name="spiciness" value="medium">
@@ -42,16 +44,8 @@
 
     </select><br>
 
-    <label for="people">5. How many persons are you cooking for?</label>
-    <select id="people" name="people">
-        <option value="1 person"> 1 person </option>
-        <option value="2 person"> 2 persons </option>
-        <option value="3 person"> 3 persons </option>
-        <option value="4 person"> 4 persons </option>
-        <option value="5 person"> 5 persons </option>
-        <option value="6 person"> 6 persons </option>
-        <option value="more"> more than 6 persons </option>
-    </select><br>
+    <label for="persons">5. How many persons are you cooking for?</label>
+    <input type="number" id="persons" name="persons" min="1" max="10"><br>
 
 
     <button type="button" onclick="selectDish()">Find My Dish</button>

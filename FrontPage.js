@@ -5,6 +5,7 @@
     const dietOptions = document.querySelectorAll('input[name="diet"]:checked');
     const diet = Array.from(dietOptions).map(option => option.value);
     const time=document.getSelection().valueOf("time")
+        const persons = document.getElementById("persons").value;
 
 
     // Perform some logic to choose the dish based on user preferences
