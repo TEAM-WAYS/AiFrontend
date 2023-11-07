@@ -1,8 +1,10 @@
 <head>
     <title>Welcome page</title>
 
+
 </head>
 <body>
+
 <h1>AI Shopping</h1>
 <p>Please answer these questions to find the perfect cuisines for you:</p>
 
@@ -16,7 +18,7 @@
         <option value="other">Other</option>
     </select><br>
 
-    <label for="spiciness" >2. How spicy do you like your food?</label>
+<!--    <label for="spiciness" >2. How spicy do you like your food?</label>-->
     <input type="radio" id="spicyMild" name="spiciness" value="mild">
     <label for="spicyMild">Mild</label>
     <input type="radio" id="spicyMedium" name="spiciness" value="medium">
@@ -24,7 +26,7 @@
     <input type="radio" id="spicySpicy" name="spiciness" value="spicy">
     <label for="spicySpicy">Spicy</label><br>
 
-    <label for="diet">3. Do you have any dietary preferences or restrictions?</label>
+<!--    <label for="diet">3. Do you have any dietary preferences or restrictions?</label>-->
     <input type="checkbox" id="vegetarian" name="diet" value="vegetarian">
     <label for="vegetarian">Vegetarian</label>
     <input type="checkbox" id="vegan" name="diet" value="vegan">
@@ -54,7 +56,7 @@
     </select><br>
 
 
-    <button type="button" onclick="selectDish()">Find My Dish</button>
+    <button type="button" id="button">Find My Dish</button>
 </form>
 
 <div id="result"></div>
