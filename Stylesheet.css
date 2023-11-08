@@ -51,24 +51,32 @@ button:hover{
     box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
-.spicy-options{
-    display:flex;
-    justify-content:space-around;
+
+.spicy-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
 }
 
-.spicy-button{
-    background-color:transparent;
-    border:none;
-    cursor:pointer;
+.spicy-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #FF5733;
 }
 
-.spicy-button:focus{
-    outline:none;
+.spicy-button:focus {
+    outline: none;
 }
 
-.spicy-buttoni{
-    color:#FF5733;
-    font-size:24px;
+#noSpiceBtn {
+    background-color: transparent;
+    color: #3498db;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/*Igang med at lave spicy chillier til knapper du!!!!!!!!!!!!!!!!!!!!!!!*/
+#noSpiceBtn:hover {
+    background-color: #3498db;
+    color: white;
+}

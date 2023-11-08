@@ -22,15 +22,17 @@
     <br>
 
     <label>2. Spice Tolerance</label>
-    <input type="radio" id="noSpice" name="spiciness" value="noSpice">
-    <label for="noSpice">Not hot</label>
-    <input type="radio" id="spicyMild" name="spiciness" value="mild">
-    <label for="spicyMild"><i class="fas fa-pepper-hot"></i></label>
-    <input type="radio" id="spicyMedium" name="spiciness" value="medium">
-    <label for="spicyMedium"i><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i></label>
-    <input type="radio" id="spicySpicy" name="spiciness" value="spicy">
-    <label for="spicySpicy"><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i></label><br>
-
+    <button type="button" class="spicy-button" id="noSpiceBtn">
+        <i class="fa-solid fa-xmark"></i>
+    <button type="button" class="spicy-button" id="mildSpiceBtn">
+        <i class="fas fa-pepper-hot"></i>
+    </button>
+    <button type="button" class="spicy-button" id="mediumSpiceBtn">
+        <i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i>
+    </button>
+    <button type="button" class="spicy-button" id="spicySpiceBtn">
+        <i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i><i class="fas fa-pepper-hot"></i>
+    </button>
 
 
 
@@ -68,7 +70,7 @@
 </form>
 
 <div id="result">
-    <p id="loading-message" style="display: none;">Loading....</p>
+    <p id="loading-message" style="display: none;">Loading...</p>
 </div>
 
 <script type="module" src="API.js"></script>
