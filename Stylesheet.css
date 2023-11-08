@@ -1,0 +1,74 @@
+body{
+    font-family:Arial,sans-serif;
+    background-color:#f2f2f2;
+}
+
+h1{
+    color:#4caf50;
+}
+
+form{
+    background-color:#ffffff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+label{
+    display:block;
+    margin-bottom:10px;
+    color:#4caf50;
+}
+
+select,input[type="radio"],input[type="checkbox"]{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid#ccc;
+    border-radius:5px;
+    background-color:#f9f9f9;
+}
+
+button{
+    background-color:#4caf50;
+    color:#ffffff;
+    border:none;
+    padding:15px 30px;
+    cursor:pointer;
+    border-radius:5px;
+    transition:background-color0.3s ease;
+}
+
+button:hover{
+    background-color:#45a049;
+}
+
+#result{
+    margin-top:20px;
+    padding:20px;
+    background-color:#ffffff;
+    border-radius:10px;
+    box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.spicy-options{
+    display:flex;
+    justify-content:space-around;
+}
+
+.spicy-button{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+}
+
+.spicy-button:focus{
+    outline:none;
+}
+
+.spicy-buttoni{
+    color:#FF5733;
+    font-size:24px;
+}
+
+/*Igang med at lave spicy chillier til knapper du!!!!!!!!!!!!!!!!!!!!!!!*/
