@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome page</title>
+</head>
+<body>
+
+<h1>AI Shopping</h1>
+
+<form id="dishSelectorForm">
+    <label for="cuisine">1. Cuisine</label>
+    <select id="cuisine" name="cuisine">
+        <option value="italian">Italian</option>
+        <option value="french">French</option>
+        <option value="chinese">Chinese</option>
+        <option value="other">Other</option>
+    </select>
+    <input type="text" id="otherCuisine" name="otherCuisine" style="display: none;" placeholder="Please specify">
+    <br>
+
+    <label>2. Spice Tolerance</label>
+    <input type="radio" id="noSpice" name="spiciness" value="noSpice">
+    <label for="noSpice">No spice</label>
+    <input type="radio" id="spicyMild" name="spiciness" value="mild">
+    <label for="spicyMild">Mild</label>
+    <input type="radio" id="spicyMedium" name="spiciness" value="medium">
+    <label for="spicyMedium">Medium</label>
+    <input type="radio" id="spicySpicy" name="spiciness" value="spicy">
+    <label for="spicySpicy">Spicy</label><br>
+
+    <label >3. Dietary preferences and restrictions</label>
+    <input type="checkbox" id="vegetarian" name="diet" value="vegetarian">
+    <label for="vegetarian">Vegetarian</label>
+    <input type="checkbox" id="vegan" name="diet" value="vegan">
+    <label for="vegan">Vegan</label>
+    <input type="checkbox" id="glutenFree" name="diet" value="gluten-free">
+    <label for="glutenFree">Gluten-Free</label><br>
+
+    <label for="time"> 4. cooking time </label>
+    <select id="time" name="time">
+        <option value="short">Under 30 minutes</option>
+        <option value="medium">30-60 minutes</option>
+        <option value="long">60-90 minutes</option>
+        <option value="combi1">Weekend:60-90 minutes, weekdays: under 30 minutes</option>
+        <option value="combi2">Weekend:30-60 minutes, weekdays: under 30 minutes</option>
+
+    </select><br>
+
+    <label for="people">5. amount</label>
+    <select id="people" name="people">
+        <option value="1 person"> 1 person </option>
+        <option value="2 person"> 2 persons </option>
+        <option value="3 person"> 3 persons </option>
+        <option value="4 person"> 4 persons </option>
+        <option value="5 person"> 5 persons </option>
+        <option value="6 person"> 6 persons </option>
+    </select>
+    <input type="text" id="otherPeople" name="otherPeople" style="display: none;" placeholder="Enter the number of people">
+    <br>
+    <button type="submit" id="submit">Find My Dish</button>
+
+</form>
+
+<div id="result">
+    <p id="loading-message" style="display: none;">Loading....</p>
+</div>
+
+<script type="module" src="API.js"></script>
+<script type="module" src="Ai.js"></script>
+</body>
+</html>
