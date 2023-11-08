@@ -15,21 +15,31 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     const otherCuisine = document.getElementById("otherCuisine").value;
     const otherPeople = document.getElementById("otherPeople").value;
 
-    let recommendation = "Based on your preferences:\n";
-    recommendation += `1. Cuisine: ${cuisine}\n`;
-    recommendation += `2. Spiciness: ${spiciness}\n`;
-    recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")}\n`;
-    recommendation += `4. Cooking Time: ${time}\n`;
-    recommendation += `5. Number of People: ${otherPeople || people}\n`;
-
+    let recommendation = "Create a JSON object with field names ‘NAME’, ‘INGREDIENTS’ and ‘INSTRUCTIONS’";
+    recommendation += `assign dish name to ‘NAME’, assign ingredients for the dish to ‘INGREDIENTS’ and cooking instructions to ‘INSTRUCTIONS’`;
+    recommendation += `recommend a dish based on following criteria’`;
+    recommendation += `1. Cuisine: ${cuisine}`;
+    recommendation += `2. Spiciness: ${spiciness}`;
+    recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")}`;
+    recommendation += `4. Cooking Time: ${time}`;
+    recommendation += `5. Number of People: ${otherPeople || people}`;
+    console.log(recommendation)
+    console.log("-----------")
     fetchDishRecommendation(recommendation)
         .then(data => {
+            console.log(data)
             const assistantContent = data[0].message.content;
-
+            var jsonString = data[0].message.content;
+            var jsonObject = JSON.parse(jsonString);
+            console.log("-------------")
+            console.log(assistantContent)
             document.getElementById("loading-message").style.display = "none";
 
             const resultElement = document.getElementById("result");
+            resultElement.textContent = "INGREDIENTS: " + jsonObject.INGREDIENTS;
+            /*
             resultElement.textContent = "Dish Recommendation: " + assistantContent;
+             */
         })
         .catch(error => {
             document.getElementById("loading-message").style.display = "none";
