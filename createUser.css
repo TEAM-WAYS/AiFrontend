@@ -31,7 +31,7 @@ input[type="email"] {
     border-radius: 6px;
 }
 
-button {
+#button {
     background-color: mediumseagreen;
     color: #fff;
     border: none;
@@ -40,15 +40,12 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+#button:hover {
     background-color: green;
 }
-#signUp {
-    background-color:lightgray;
-}
 
-#loginMessage {
-    text-align: center;
-    margin-top: 10px;
-    color: #0074d9;
+
+#error-message {
+    font-family: Arial, sans-serif;
+    color: #FF5733;
 }
