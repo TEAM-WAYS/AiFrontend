@@ -14,17 +14,39 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     const people = document.getElementById("people").value;
     const otherCuisine = document.getElementById("otherCuisine").value;
     const otherPeople = document.getElementById("otherPeople").value;
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
+    const height = parseFloat(heightInput.value);
+    const weight = parseFloat(weightInput.value);
 
-    let recommendation = "response must be formatted in JSON ";
-    recommendation += `Create a JSON object with field names ‘NAME’, ‘DESCRIPTION’, ‘INGREDIENTS’ and ‘INSTRUCTIONS’’`;
-    recommendation += `assign dish name to ‘NAME’, assign a recipe description to ‘DESCRIPTION’, `;
-    recommendation += `create a JSON object with field names ‘INGNAME’, ‘INGAMOUNT’ and ‘INGMEASUREMENT’ assign ingredient name to ‘INGNAME’, assign ingredient amount without measurement unit to ‘INGAMOUNT’, assign ingredient measurement unit to ‘INGMEASUREMENT’ assign the JSON object with ingredients for the dish to ‘INGREDIENTS’ and cooking instructions to ‘INSTRUCTIONS’`;
-    recommendation += `recommend a dish based on following criteria`;
-    recommendation += `1. Cuisine: ${cuisine} `;
-    recommendation += `2. Spiciness: ${spiciness} `;
-    recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")} `;
-    recommendation += `4. Cooking Time: ${time} `;
-    recommendation += `5. Number of People: ${otherPeople || people} `;
+
+    if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        document.getElementById("bmiResult").textContent = "Invalid input. Please enter valid height and weight.";
+        return;
+    }
+
+
+
+    const bmi = calculateBMI(height, weight);
+    const bmiCategory = getBMICategory(bmi);
+
+
+
+
+
+    let recommendation = "Create a JSON object with field names ‘NAME’, ‘INGREDIENTS’ and ‘INSTRUCTIONS’";
+    recommendation += `assign dish name to ‘NAME’, assign ingredients for the dish to ‘INGREDIENTS’ and cooking instructions to ‘INSTRUCTIONS’`;
+    recommendation += `recommend a dish based on following criteria’`;
+    recommendation += `1. Cuisine: ${cuisine}`;
+    recommendation += `2. Spiciness: ${spiciness}`;
+    recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")}`;
+    recommendation += `4. Cooking Time: ${time}`;
+    recommendation += `5. Number of People: ${otherPeople || people}`;
+    recommendation += `6. BMI Category: ${bmiCategory}`;
+    if (bmiCategory === "Overweight" || bmiCategory === "Obese") {
+        recommendation += ` (Healthy Food)`;
+    }
+
     console.log(recommendation)
     console.log("-----------")
     fetchDishRecommendation(recommendation)
@@ -38,7 +60,6 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
             document.getElementById("loading-message").style.display = "none";
 
             const resultElement = document.getElementById("result");
-            console.log(jsonObject)
             resultElement.textContent = "INGREDIENTS: " + jsonObject.INGREDIENTS;
             /*
             resultElement.textContent = "Dish Recommendation: " + assistantContent;
@@ -74,21 +95,34 @@ document.getElementById("people").addEventListener("change", function() {
     }
 });
 
+
+
 document.getElementById("bmiCalculatorForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const height = parseFloat(document.getElementById("height").value);
-    const weight = parseFloat(document.getElementById("weight").value);
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
+    const bmiResultElement = document.getElementById("bmiResult");
+
+
+    const height = parseFloat(heightInput.value);
+    const weight = parseFloat(weightInput.value);
 
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-        document.getElementById("bmiResult").textContent = "Invalid input. Please enter valid height and weight.";
+        bmiResultElement.textContent = "Invalid input. Please enter valid height and weight.";
         return;
     }
+
+
 
     const bmi = calculateBMI(height, weight);
     const bmiCategory = getBMICategory(bmi);
 
-    document.getElementById("bmiResult").textContent = `Your BMI: ${bmi.toFixed(2)} (${bmiCategory})`;
+
+
+
+
+    bmiResultElement.textContent = `Your BMI: ${bmi.toFixed(2)} (${bmiCategory})`;
 });
 
 function calculateBMI(height, weight) {
@@ -99,9 +133,9 @@ function calculateBMI(height, weight) {
 function getBMICategory(bmi) {
     if (bmi < 18.5) {
         return "Underweight";
-    } else if (bmi >= 18.5 && bmi < 24.9) {
+    } else if (bmi < 24.9) {
         return "Normal Weight";
-    } else if (bmi >= 25 && bmi < 29.9) {
+    } else if (bmi < 29.9) {
         return "Overweight";
     } else {
         return "Obese";
