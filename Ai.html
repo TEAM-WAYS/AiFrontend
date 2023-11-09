@@ -62,6 +62,7 @@
     </select>
     <input type="number" id="otherPeople" name="otherPeople" style="display: none;" placeholder="Enter the number of people">
     <br>
+
     <button type="submit" id="submit">Find My Dish</button>
 
 </form>
@@ -69,6 +70,22 @@
 <div id="result">
     <p id="loading-message" style="display: none;">Loading....</p>
 </div>
+
+
+<h2>Calculate Your BMI</h2>
+
+<form id="bmiCalculatorForm">
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" name="height" required><br>
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" name="weight" required><br>
+
+    <button type="submit" id="calculateBMI">Calculate BMI</button>
+</form>
+
+<div id="bmiResult"></div>
+
 
 <script type="module" src="API.js"></script>
 <script type="module" src="Ai.js"></script>
