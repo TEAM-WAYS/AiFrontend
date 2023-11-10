@@ -19,8 +19,8 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     const otherPeople = document.getElementById("otherPeople").value;
     const heightInput = document.getElementById("height");
     const weightInput = document.getElementById("weight");
-    const height = parseFloat(heightInput.value);
-    const weight = parseFloat(weightInput.value);
+    const height = parseFloat(heightInput.value) || 170; // Default højde centimeter
+    const weight = parseFloat(weightInput.value) || 70; // Default vægt kilogram
 
 
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
@@ -169,8 +169,8 @@ document.getElementById("bmiCalculatorForm").addEventListener("submit", function
     const heightInput = document.getElementById("height");
     const weightInput = document.getElementById("weight");
 
-    const height = parseFloat(heightInput.value);
-    const weight = parseFloat(weightInput.value);
+    const height = parseFloat(heightInput.value) || 170; // Default højde centimeter
+    const weight = parseFloat(weightInput.value) || 70; // Default vægt kilogram
 
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
         bmiResultElement.textContent = "Invalid input. Please enter valid height and weight.";
