@@ -1,12 +1,15 @@
 import {
-    fetchDishRecommendation
+    fetchDishRecommendation,
+    createRecipe
 } from './API.js';
 
 document.getElementById("dishSelectorForm").addEventListener("submit", function (event) {
     event.preventDefault();
-
-    document.getElementById("loading-message").style.display = "block";
-
+    try {
+        document.getElementById("loading-message").style.display = "block";
+    }catch (lazyError){
+        console.error("i am stupid")
+    }
     const cuisine = document.getElementById("cuisine").value;
     const spiciness = document.querySelector('input[name="spiciness"]:checked').value;
     const dietaryPreferences = [...document.querySelectorAll('input[name="diet"]:checked')].map(input => input.value);
@@ -30,14 +33,19 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     fetchDishRecommendation(recommendation)
         .then(data => {
             console.log(data)
-            var jsonString =data[0].message.content;
+            const saveRecipeButton = document.getElementById("saveRecipeButton");
+
+            saveRecipeButton.removeAttribute('hidden');
+            let jsonString = data[0].message.content;
+            let jsonObject;
             try {
-                var jsonObject = JSON.parse(jsonString);
+                jsonObject = JSON.parse(jsonString);
+                document.getElementById("loading-message").style.display = "none";
             } catch (error) {
                 console.error("Error parsing JSON:", error);
 
-                var startIndex = jsonString.indexOf('{');
-                var endIndex = jsonString.lastIndexOf('}');
+                let startIndex = jsonString.indexOf('{');
+                let endIndex = jsonString.lastIndexOf('}');
 
                 if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
                     jsonString = jsonString.substring(startIndex, endIndex + 1);
@@ -52,9 +60,52 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
             }
             console.log(jsonObject);
 
-            document.getElementById("loading-message").style.display = "none";
+            const dishName = jsonObject.NAME;
+            const descriptiondata = jsonObject.DESCRIPTION;
+            const ingredientdata = jsonObject.INGREDIENTS;
+            const instructiondata = jsonObject.INSTRUCTIONS;
+            let formattedIngredients;
+            try {
+                formattedIngredients = ingredientdata.map(ingredient => `
+             ${ingredient.INGNAME} ${ingredient.INGAMOUNT} ${ingredient.INGMEASUREMENT}
+             `).join('<br>');
+            } catch (newError){
+                console.error("ingredients format fail")
+            }
+
+            let formattedInstructions
+            try {
+                formattedInstructions = instructiondata.replace(/\n/g, '<br>');
+            } catch (newError){
+                console.error("instructions format fail")
+            }
+
             const resultElement = document.getElementById("result");
-            resultElement.textContent = "INGREDIENTS: " + jsonObject.INGREDIENTS;
+
+            resultElement.innerHTML = `
+                <strong>${dishName}</strong><br>
+                ${descriptiondata}<br><br>
+                Ingredients:<br>
+                ${formattedIngredients}<br><br>
+                Cooking instructions:<br> ${formattedInstructions}<br>
+            `;
+
+            const Recipe= {
+                name: dishName,
+                description: descriptiondata,
+                ingredients: JSON.stringify(ingredientdata),
+                instructions: instructiondata,
+            };
+            saveRecipeButton.addEventListener('click', () => {
+                console.log(JSON.stringify(Recipe))
+                createRecipe(Recipe)
+                    .then(data => {
+                    console.log('Recipe data sent successfully:', data);
+                })
+                    .catch(error => {
+                        console.error('Error sending recipe data:', error);
+                    });
+            });
         })
         .catch(error => {
             document.getElementById("loading-message").style.display = "none";
@@ -62,13 +113,14 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
             const resultElement = document.getElementById("result");
             resultElement.textContent = "Error: " + error.message;
         }
+
         );
 });
 
 
 //cuisine when selecting other
 document.getElementById("cuisine").addEventListener("change", function() {
-    var otherCuisineInput = document.getElementById("otherCuisine");
+    let otherCuisineInput = document.getElementById("otherCuisine");
     if (this.value === "other") {
         otherCuisineInput.style.display = "block";
     } else {
@@ -78,7 +130,7 @@ document.getElementById("cuisine").addEventListener("change", function() {
 });
 //people when selecting more
 document.getElementById("people").addEventListener("change", function() {
-    var otherPeopleInput = document.getElementById("otherPeople");
+    let otherPeopleInput = document.getElementById("otherPeople");
     if (this.value === "more") {
         otherPeopleInput.style.display = "block";
     } else {
@@ -86,4 +138,3 @@ document.getElementById("people").addEventListener("change", function() {
         otherPeopleInput.value = "";
     }
 });
-
