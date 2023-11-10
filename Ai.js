@@ -17,6 +17,8 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     const people = document.getElementById("people").value;
     const otherCuisine = document.getElementById("otherCuisine").value;
     const otherPeople = document.getElementById("otherPeople").value;
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
     const height = parseFloat(heightInput.value);
     const weight = parseFloat(weightInput.value);
 
@@ -42,14 +44,6 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")} `;
     recommendation += `4. Cooking Time: ${time} `;
     recommendation += `5. Number of People: ${otherPeople || people} `;
-    let recommendation = "Create a JSON object with field names ‘NAME’, ‘INGREDIENTS’ and ‘INSTRUCTIONS’";
-    recommendation += `assign dish name to ‘NAME’, assign ingredients for the dish to ‘INGREDIENTS’ and cooking instructions to ‘INSTRUCTIONS’`;
-    recommendation += `recommend a dish based on following criteria’`;
-    recommendation += `1. Cuisine: ${cuisine}`;
-    recommendation += `2. Spiciness: ${spiciness}`;
-    recommendation += `3. Dietary Preferences: ${dietaryPreferences.join(", ")}`;
-    recommendation += `4. Cooking Time: ${time}`;
-    recommendation += `5. Number of People: ${otherPeople || people}`;
     recommendation += `6. BMI Category: ${bmiCategory}`;
     if (bmiCategory === "Overweight" || bmiCategory === "Obese") {
         recommendation += ` (Healthy Food)`;
@@ -169,10 +163,11 @@ document.getElementById("people").addEventListener("change", function() {
 document.getElementById("bmiCalculatorForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const heightInput = document.getElementById("height");
-    const weightInput = document.getElementById("weight");
+
     const bmiResultElement = document.getElementById("bmiResult");
 
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
 
     const height = parseFloat(heightInput.value);
     const weight = parseFloat(weightInput.value);
