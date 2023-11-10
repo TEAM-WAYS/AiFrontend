@@ -11,7 +11,7 @@ document.getElementById("registration-form").addEventListener("submit", function
         email: email
     };
 
-    fetch('/register', {
+    fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -23,6 +23,9 @@ document.getElementById("registration-form").addEventListener("submit", function
                 // User registration was successful
                 document.getElementById("error-message").style.display = "none";
                 alert("User registered successfully!");
+                setTimeout(()=> {
+                    window.location.href = "Ai.html";
+                },1000 )
             } else {
                 // Handle registration errors
                 response.json().then(data => {
