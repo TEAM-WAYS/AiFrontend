@@ -30,26 +30,39 @@ document.getElementById("dishSelectorForm").addEventListener("submit", function 
     fetchDishRecommendation(recommendation)
         .then(data => {
             console.log(data)
-            const assistantContent = data[0].message.content;
-            var jsonString = data[0].message.content;
-            var jsonObject = JSON.parse(jsonString);
-            console.log("-------------")
-            console.log(assistantContent)
-            document.getElementById("loading-message").style.display = "none";
+            var jsonString =data[0].message.content;
+            try {
+                var jsonObject = JSON.parse(jsonString);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
 
+                var startIndex = jsonString.indexOf('{');
+                var endIndex = jsonString.lastIndexOf('}');
+
+                if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+                    jsonString = jsonString.substring(startIndex, endIndex + 1);
+                    try {
+                        jsonObject = JSON.parse(jsonString);
+                    } catch (newError) {
+                        console.error("Error parsing cleaned JSON:", newError);
+                    }
+                } else {
+                    console.error("Unable to find JSON in the string.");
+                }
+            }
+            console.log(jsonObject);
+
+            document.getElementById("loading-message").style.display = "none";
             const resultElement = document.getElementById("result");
-            console.log(jsonObject)
             resultElement.textContent = "INGREDIENTS: " + jsonObject.INGREDIENTS;
-            /*
-            resultElement.textContent = "Dish Recommendation: " + assistantContent;
-             */
         })
         .catch(error => {
             document.getElementById("loading-message").style.display = "none";
 
             const resultElement = document.getElementById("result");
             resultElement.textContent = "Error: " + error.message;
-        });
+        }
+        );
 });
 
 
